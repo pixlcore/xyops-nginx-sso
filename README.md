@@ -36,7 +36,7 @@ services:
 
   oauth2-proxy:
     image: quay.io/oauth2-proxy/oauth2-proxy:latest
-	...
+    ...
 ```
 
 # License
