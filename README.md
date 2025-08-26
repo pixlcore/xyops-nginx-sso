@@ -34,8 +34,8 @@ services:
       XYOPS_masters: xyops01.yourcompany.com,xyops02.yourcompany.com
       XYOPS_port: 5522
     volumes:
-      - "./local.crt:/etc/local.crt:ro"
-      - "./local.key:/etc/local.key:ro"
+      - "./tls.crt:/etc/tls.crt:ro"
+      - "./tls.key:/etc/tls.key:ro"
     ports:
       - "443:443"
     networks:
