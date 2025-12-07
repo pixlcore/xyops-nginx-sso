@@ -4,4 +4,4 @@
 /usr/bin/xyops-healthcheck
 
 # Start nginx in the foreground
-/usr/sbin/nginx -g 'daemon off;'
+exec /usr/sbin/nginx -g 'daemon off;'
