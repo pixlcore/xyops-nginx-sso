@@ -1,6 +1,6 @@
 {
 	"name": "xyops-nginx-sso",
-	"version": "1.0.7",
+	"version": "1.0.8",
 	"private": true,
 	"description": "xyOps Multi-Master Nginx TLS/SSO.",
 	"author": "Joseph Huckaby <jhuckaby@pixlcore.com>",
