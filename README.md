@@ -1,21 +1,20 @@
-# xyOps Multi-Master Nginx TLS/SSO
+# xyOps Multi-Master Nginx SSO
 
 This repo generates a custom Docker Image designed to be used with [xyOps](https://xyops.io).
 
-This is a wrapper around the official [Nginx Docker Image](https://hub.docker.com/_/nginx), which layers in [Node.js](https://nodejs.org/) and a custom [Health Check Daemon](https://github.com/pixlcore/xyops-healthcheck) for [xyOps](https://xyops.io).  This is for use with xyOps multi-master setups, utilizing TLS, and [OAuth2-Proxy](https://github.com/oauth2-proxy/oauth2-proxy) for SSO integration.  For setup instructions, please see the [xyOps SSO Setup Guide](https://github.com/pixlcore/xyops/blob/main/docs/sso.md).
+This is a wrapper around the official [Nginx Docker Image](https://hub.docker.com/_/nginx), which layers in [Node.js](https://nodejs.org/) and a custom [Health Check Daemon](https://github.com/pixlcore/xyops-healthcheck) for [xyOps](https://xyops.io).  This is for use with xyOps multi-master setups, using [OAuth2-Proxy](https://github.com/oauth2-proxy/oauth2-proxy) for SSO integration.  Plain HTTP is available on port 80 for local testing, and HTTPS is always enabled on port 443 using default self-signed certs.  For setup instructions, please see the [xyOps SSO Setup Guide](https://docs.xyops.io/sso).
 
 ## Current Versions
 
-- Nginx v1.28
-- OAuth2-Proxy v7.12
-- Node.js v22
+- Nginx v1.30
+- Node.js v24
 - Health Check v1.0.5
 
 # Usage
 
 ## Docker
 
-This repo automatically publishes a Docker image on every tag, which is designed to run with [Nginx](https://nginx.org/) for xyOps mutli-master installs.  For usage instructions, see the [xyOps SSO Setup Guide](https://github.com/pixlcore/xyops/blob/main/docs/sso.md).  The Docker Image name is:
+This repo automatically publishes a Docker image on every tag, which is designed to run with [Nginx](https://nginx.org/) for xyOps multi-master installs.  For usage instructions, see the [xyOps SSO Setup Guide](https://docs.xyops.io/sso).  The Docker Image name is:
 
 ```
 ghcr.io/pixlcore/xyops-nginx-sso
@@ -37,6 +36,7 @@ services:
       - "./tls.crt:/etc/tls.crt:ro"
       - "./tls.key:/etc/tls.key:ro"
     ports:
+      - "80:80"
       - "443:443"
     networks:
       xyops-net:
@@ -45,6 +45,8 @@ services:
     image: quay.io/oauth2-proxy/oauth2-proxy:latest
     ...
 ```
+
+For local testing, you may omit the TLS volume mounts.  The image includes default self-signed certs at `/etc/tls.crt` and `/etc/tls.key`, and production certs can overwrite them by mounting files at those same paths.
 
 # License
 
