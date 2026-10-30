@@ -1,4 +1,4 @@
-# xyOps Multi-Master Nginx SSO
+# xyOps Multi-Conductor Nginx SSO
 
 This repo generates a custom Docker Image designed to be used with [xyOps](https://xyops.io).
 
