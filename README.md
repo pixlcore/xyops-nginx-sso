@@ -48,6 +48,14 @@ services:
 
 For local testing, you may omit the TLS volume mounts.  The image includes default self-signed certs at `/etc/tls.crt` and `/etc/tls.key`, and production certs can overwrite them by mounting files at those same paths.
 
+## MCP Clients
+
+When the [MCP Server extension](https://github.com/pixlcore/xyext-mcp) is installed, connect your MCP client to `/mcp` on the public xyOps URL. Supply `Authorization: Bearer YOUR_XYOPS_API_KEY` in the client.
+
+The exact `/mcp` route bypasses browser SSO and forwards the client's Authorization header unchanged to the current primary conductor. xyOps still validates the API key and enforces its permissions. Response buffering, caching, and compression are disabled on this route so SSE events reach clients promptly. Upstream errors are passed through without login redirects, and tool requests are not retried against another conductor.
+
+Existing deployments need an image containing this configuration, or the equivalent update to their mounted Nginx configuration, followed by a reload or restart. Updating OAuth2-Proxy's skip list alone does not change Nginx routing in this setup.
+
 # License
 
 **The MIT License (MIT)**
